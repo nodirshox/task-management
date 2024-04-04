@@ -9,7 +9,7 @@ export default (
   next: NextFunction
 ) => {
   let currentError: ApiError;
-  console.error(err.message);
+  console.error("Error", err);
   if (err.name === "ValidationError" || err instanceof ValidationError) {
     currentError = new ApiError(400, "VALIDATION_ERROR");
     currentError.setErrors(err.details);

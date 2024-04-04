@@ -10,7 +10,7 @@ interface IApiErrorOptions {
 export default class ApiError extends Error {
   isApiError = true;
   code: number = 500;
-  msgCode: string | undefined;
+  mesage: string | undefined;
   errors?: any[];
   constructor(
     code: number,
@@ -20,9 +20,8 @@ export default class ApiError extends Error {
     super(msgCode || message);
 
     this.code = code;
-    this.msgCode =
-      this.msgCode || http.STATUS_CODES[code] || "INTERNAL_SERVER_ERROR";
-    this.msgCode = this.msgCode.replace(/\s/g, "_").toUpperCase();
+    this.mesage = msgCode || http.STATUS_CODES[code] || "INTERNAL_SERVER_ERROR";
+    this.mesage = this.mesage.replace(/\s/g, "_").toUpperCase();
     if (message) {
       this.message = message;
     }

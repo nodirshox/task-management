@@ -1,58 +1,84 @@
-import Task from "../../models/Task";
-import { Request } from "express";
+import { autoInjectable } from "tsyringe";
+import { Request, Response } from "express";
+import { ApiError, ApiResponse, tryAsync } from "../../utils/index";
+import TaskRepository from "./task.repository";
 
+@autoInjectable()
 export default class TaskService {
-  createTask(task: object) {
-    return Task.create(task);
-  }
+  constructor(private readonly repository: TaskRepository) {}
 
-  find(query: object, req: Request) {
-    const DEFAULT_PAGE_LIMIT: number = 10;
+  create = tryAsync(async (req: Request, res: Response) => {
+    const request = req.body;
 
-    const page: string = req.query.page as string;
-    const limit: string = req.query.limit as string;
+    const result = await this.repository.createTask(request);
 
-    interface IOptions {
-      skip: number;
-      limit: number;
-      sort: {
-        created_at: string;
-      };
-    }
+    new ApiResponse(result, 201).send(res);
+  });
 
-    const options: IOptions = {
-      skip:
-        (page ? parseInt(page, 10) - 1 : 0) *
-        (limit ? parseInt(limit, 10) : DEFAULT_PAGE_LIMIT),
-      limit: limit ? parseInt(limit, 10) : DEFAULT_PAGE_LIMIT,
-      sort: {
-        created_at: "desc",
-      },
-    };
-    return Promise.all([
-      Task.find(query, {}, options),
-      Task.countDocuments(query),
-    ]);
-  }
+  find = tryAsync(async (req: Request, res: Response) => {
+    const [tasks, total] = await this.repository.find();
+    new ApiResponse({ tasks, total }).send(res);
+  });
 
-  findOne(query: object) {
-    return Task.findOne(query);
-  }
+  get = tryAsync(async (req: Request, res: Response) => {
+    const taskId = req.params.id;
 
-  update(query: object, update: object, options: object = {}) {
-    return Task.findOneAndUpdate(query, update, options);
-  }
+    const result = await this.getTask(taskId);
 
-  delete(id: string) {
-    const query: any = {
-      _id: id,
-      deleted_at: null,
-    };
+    new ApiResponse(result).send(res);
+  });
+
+  update = tryAsync(async (req: Request, res: Response) => {
+    const taskId = req.params.id;
+    const newTask = req.body;
 
     const updateData = {
-      deleted_at: new Date(),
+      title: newTask.title,
+      updatedAt: new Date(),
+    };
+    const result = await this.repository.update(taskId, updateData, {
+      new: true,
+    });
+
+    if (!result) {
+      throw new ApiError(404);
+    }
+    new ApiResponse(result).send(res);
+  });
+
+  completeTask = tryAsync(async (req: Request, res: Response) => {
+    const taskId = req.params.id;
+
+    await this.getTask(taskId);
+
+    const updateData = {
+      isCompleted: true,
     };
 
-    return Task.findOneAndUpdate(query, updateData);
-  }
+    await this.repository.update(taskId, updateData, {
+      new: true,
+    });
+
+    new ApiResponse({}, 204).send(res);
+  });
+
+  remove = tryAsync(async (req: Request, res: Response) => {
+    const taskId = req.params.id;
+
+    await this.getTask(taskId);
+
+    await this.repository.delete(taskId);
+
+    new ApiResponse({}, 204).send(res);
+  });
+
+  private getTask = async (id: string) => {
+    const task = await this.repository.findOne(id);
+
+    if (!task) {
+      throw new ApiError(404);
+    }
+
+    return task;
+  };
 }

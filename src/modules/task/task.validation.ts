@@ -9,7 +9,6 @@ export default {
   update: {
     body: Joi.object({
       title: Joi.string().required(),
-      isCompleted: Joi.boolean().required(),
     }),
   },
 };
