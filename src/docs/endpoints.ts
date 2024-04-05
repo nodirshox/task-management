@@ -8,6 +8,7 @@ import { remove } from "./task/remove";
 import { patch } from "./task/patch";
 import { users } from "./report/users";
 import { userTasks } from "./report/userTasks";
+import { info } from "./auth/info";
 
 export const endpoints = {
   paths: {
@@ -16,6 +17,9 @@ export const endpoints = {
     },
     "/auth/login": {
       ...login,
+    },
+    "/auth/info": {
+      ...info,
     },
     "/tasks": {
       ...find,

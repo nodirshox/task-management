@@ -8,4 +8,8 @@ export default class AuthRepository {
   getByEmail(email: string) {
     return User.findOne({ email }).select("+password");
   }
+
+  getById(userId: string) {
+    return User.findById(userId);
+  }
 }

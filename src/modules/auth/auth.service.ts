@@ -57,7 +57,6 @@ export default class AuthService {
 
     const jwt = {
       userId: user._id,
-      role: user.role,
       iat: Math.floor(Date.now() / 1000),
       exp: Math.floor(Date.now() / 1000) + 60 * 60 * ACCESS_TOKEN_EXPIRATION,
     };
@@ -77,5 +76,13 @@ export default class AuthService {
       },
       200
     ).send(res);
+  });
+
+  info = tryAsync(async (req: Request, res: Response) => {
+    const userId = res.locals.userId;
+
+    const user = await this.repository.getById(userId);
+
+    new ApiResponse(user, 200).send(res);
   });
 }

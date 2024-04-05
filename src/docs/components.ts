@@ -39,6 +39,39 @@ export const components = {
           },
         },
       },
+      UserInfo: {
+        type: "object",
+        properties: {
+          _id: {
+            type: "string",
+            example: "objectId",
+          },
+          firstName: {
+            type: "string",
+            example: "John",
+          },
+          lastName: {
+            type: "string",
+            example: "Doe",
+          },
+          email: {
+            type: "string",
+            example: "user@mail.com",
+          },
+          role: {
+            type: "string",
+            example: "USER",
+          },
+          createdAt: {
+            type: "string",
+            example: new Date(),
+          },
+          updatedAt: {
+            type: "string",
+            example: new Date(),
+          },
+        },
+      },
       Task: {
         type: "object",
         properties: {
