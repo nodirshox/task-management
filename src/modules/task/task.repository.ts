@@ -1,11 +1,11 @@
 import Task from "../../models/Task";
 
 export default class TaskRepository {
-  createTask(task: object) {
-    return Task.create(task);
+  createTask(task: object, userId: string) {
+    return Task.create({ ...task, user: userId });
   }
 
-  find() {
+  find(userId: string) {
     interface IOptions {
       sort: {
         createdAt: string;
@@ -17,11 +17,21 @@ export default class TaskRepository {
         createdAt: "desc",
       },
     };
-    return Promise.all([Task.find({}, {}, options), Task.countDocuments()]);
+    const filter = {
+      user: userId,
+    };
+    return Promise.all([
+      Task.find(filter, {}, options).populate({ path: "user" }),
+      Task.countDocuments(filter),
+    ]);
   }
 
   findOne(id: string) {
     return Task.findOne({ _id: id });
+  }
+
+  findOneWithUser(id: string) {
+    return Task.findOne({ _id: id }).populate({ path: "user" });
   }
 
   update(id: string, update: object, options: object = {}) {

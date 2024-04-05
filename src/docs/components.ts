@@ -92,10 +92,13 @@ export const components = {
       },
     },
     securitySchemes: {
-      ApiKeyAuth: {
-        type: "apiKey",
-        name: "Authorization",
+      bearerAuth: {
+        type: "http",
         in: "header",
+        name: "Authorization",
+        description: "Bearer token to access these api endpoints",
+        scheme: "bearer",
+        bearerFormat: "JWT",
       },
     },
   },

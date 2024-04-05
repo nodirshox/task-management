@@ -8,16 +8,34 @@ import hasAccess from "../../utils/Middleware";
 const router = Router();
 const service = container.resolve(TaskService);
 
+// find tasks
+router.route("/").get(hasAccess, service.find);
+
+// create task
 router
   .route("/")
-  .get(hasAccess, service.find)
-  .post(validate(validation.create, { keyByField: true }), service.create);
+  .post(
+    hasAccess,
+    validate(validation.create, { keyByField: true }),
+    service.create
+  );
 
+// get task
+router.route("/:id").get(hasAccess, service.get);
+
+// update
 router
   .route("/:id")
-  .get(service.get)
-  .put(validate(validation.update, { keyByField: true }), service.update)
-  .patch(service.completeTask)
-  .delete(service.remove);
+  .put(
+    hasAccess,
+    validate(validation.update, { keyByField: true }),
+    service.update
+  );
+
+// complete task
+router.route("/:id").patch(hasAccess, service.completeTask);
+
+// delete task
+router.route("/:id").delete(hasAccess, service.delete);
 
 export default router;

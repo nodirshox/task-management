@@ -22,5 +22,10 @@ export const create = {
         description: "Server error",
       },
     },
+    security: [
+      {
+        bearerAuth: [],
+      },
+    ],
   },
 };

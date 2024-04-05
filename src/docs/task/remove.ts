@@ -26,5 +26,10 @@ export const remove = {
         description: "Server error",
       },
     },
+    security: [
+      {
+        bearerAuth: [],
+      },
+    ],
   },
 };

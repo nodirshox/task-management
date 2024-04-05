@@ -19,7 +19,7 @@ export const find = {
     },
     security: [
       {
-        BearerAuth: [],
+        bearerAuth: [],
       },
     ],
   },

@@ -72,7 +72,7 @@ export default class AuthService {
         },
         accessToken: await new Jwt().hash(jwt),
       },
-      201
+      200
     ).send(res);
   });
 }

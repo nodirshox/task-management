@@ -41,5 +41,10 @@ export const get = {
         },
       },
     },
+    security: [
+      {
+        bearerAuth: [],
+      },
+    ],
   },
 };

@@ -41,5 +41,10 @@ export const patch = {
         },
       },
     },
+    security: [
+      {
+        bearerAuth: [],
+      },
+    ],
   },
 };

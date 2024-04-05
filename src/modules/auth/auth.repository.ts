@@ -6,6 +6,6 @@ export default class AuthRepository {
   }
 
   getByEmail(email: string) {
-    return User.findOne({ email });
+    return User.findOne({ email }).select("+password");
   }
 }

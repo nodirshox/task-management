@@ -35,5 +35,10 @@ export const update = {
         description: "Server error",
       },
     },
+    security: [
+      {
+        bearerAuth: [],
+      },
+    ],
   },
 };

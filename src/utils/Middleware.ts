@@ -1,5 +1,6 @@
 import { NextFunction, Request, Response } from "express";
 import Jwt from "./Jwt";
+import User from "../models/User";
 
 export default async function hasAccess(
   req: Request,
@@ -9,22 +10,29 @@ export default async function hasAccess(
   const token = req.header("Authorization");
 
   if (!token) {
-    res.status(401).json({ message: "Unauthorized" });
-    return;
+    return res.status(401).json({ message: "Unauthorized" });
   }
   const jwt = token.split(" ")[1];
 
   if (!jwt) {
-    res.status(401).json({ message: "Unauthorized" });
-    return;
-  }
-  let decoded: unknown = await new Jwt().decode(jwt);
-
-  if (!decoded) {
-    res.status(401).json({ message: "Token is expired" });
-    return;
+    return res.status(401).json({ message: "Unauthorized" });
   }
 
-  // res.locals.userId = decoded.userId;
+  const decoded = await new Jwt().decode(jwt);
+
+  if (!decoded || typeof decoded === "boolean") {
+    return res.status(401).json({ message: "Token is expired" });
+  }
+  const userId = decoded.userId;
+
+  const user = await User.findOne({ _id: userId });
+
+  if (!user) {
+    return res.status(401).json({ message: "User not found" });
+  }
+
+  res.locals.userId = userId;
+  res.locals.role = "USER";
+
   next();
 }
