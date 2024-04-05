@@ -1,6 +1,6 @@
 export const get = {
   get: {
-    tags: ["Task"],
+    tags: ["Tasks [USER]"],
     summary: "Get task",
     description: "Get task",
     operationId: "getTask",
@@ -33,7 +33,7 @@ export const get = {
             schema: {
               $ref: "#/components/schemas/Error",
               example: {
-                message: "We can't find the todo",
+                message: "We can't find the task",
                 internal_code: "Invalid id",
               },
             },

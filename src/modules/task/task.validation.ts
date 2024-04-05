@@ -11,4 +11,5 @@ export default {
       title: Joi.string().required(),
     }),
   },
+  get: Joi.string().hex().length(24),
 };

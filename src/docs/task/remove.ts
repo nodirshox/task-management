@@ -1,6 +1,6 @@
 export const remove = {
   delete: {
-    tags: ["Task"],
+    tags: ["Tasks [USER]"],
     summary: "Delete task",
     description: "Deleting a task",
     operationId: "deleteTask",

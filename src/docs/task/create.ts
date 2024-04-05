@@ -1,6 +1,6 @@
 export const create = {
   post: {
-    tags: ["Task"],
+    tags: ["Tasks [USER]"],
     summary: "Create task",
     description: "Create task",
     operationId: "createTask",

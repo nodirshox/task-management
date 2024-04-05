@@ -1,10 +1,16 @@
 import mongoose, { Schema, Document } from "mongoose";
 
+export enum UserRole {
+  USER = "USER",
+  ADMIN = "ADMIN",
+}
+
 interface User extends Document {
   firstName: string;
   lastName: string;
   email: string;
   password: string;
+  role: UserRole;
   createdAt: Date;
   updatedAt: Date;
 }
@@ -27,6 +33,11 @@ const UserSchema = new Schema({
     type: String,
     required: true,
     select: false,
+  },
+  role: {
+    type: String,
+    enum: Object.values(UserRole),
+    default: UserRole.USER,
   },
   createdAt: {
     type: Date,

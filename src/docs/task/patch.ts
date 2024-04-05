@@ -1,6 +1,6 @@
 export const patch = {
   patch: {
-    tags: ["Task"],
+    tags: ["Tasks [USER]"],
     summary: "Mark task completed",
     description: "Complete task",
     operationId: "completeTask",
@@ -18,13 +18,6 @@ export const patch = {
     responses: {
       "204": {
         description: "Task is marked completed",
-        content: {
-          "application/json": {
-            schema: {
-              $ref: "#/components/schemas/Task",
-            },
-          },
-        },
       },
       "404": {
         description: "Task is not found",
@@ -33,7 +26,7 @@ export const patch = {
             schema: {
               $ref: "#/components/schemas/Error",
               example: {
-                message: "We can't find the todo",
+                message: "We can't find the task",
                 internal_code: "Invalid id",
               },
             },

@@ -1,6 +1,6 @@
 export const update = {
   put: {
-    tags: ["Task"],
+    tags: ["Tasks [USER]"],
     summary: "Update task",
     description: "Update task",
     operationId: "updateTask",

@@ -4,7 +4,10 @@ export const tags = {
       name: "Auth",
     },
     {
-      name: "Task",
+      name: "Tasks [USER]",
+    },
+    {
+      name: "Reports [ADMIN]",
     },
   ],
 };

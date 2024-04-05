@@ -27,6 +27,7 @@ export default class AuthService {
         firstName: user.firstName,
         lastName: user.lastName,
         email: user.email,
+        role: user.role,
         createdAt: user.createdAt,
         updatedAt: user.updatedAt,
       },
@@ -56,6 +57,7 @@ export default class AuthService {
 
     const jwt = {
       userId: user._id,
+      role: user.role,
       iat: Math.floor(Date.now() / 1000),
       exp: Math.floor(Date.now() / 1000) + 60 * 60 * ACCESS_TOKEN_EXPIRATION,
     };
@@ -67,6 +69,7 @@ export default class AuthService {
           firstName: user.firstName,
           lastName: user.lastName,
           email: user.email,
+          role: user.role,
           createdAt: user.createdAt,
           updatedAt: user.updatedAt,
         },

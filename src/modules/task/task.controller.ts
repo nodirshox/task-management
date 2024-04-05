@@ -3,39 +3,60 @@ import { validate } from "express-validation";
 import validation from "./task.validation";
 import TaskService from "./task.service";
 import { container } from "tsyringe";
-import hasAccess from "../../utils/Middleware";
+import { hasAccess } from "../../utils/Middleware";
+import { UserRole } from "../../models/User";
 
 const router = Router();
 const service = container.resolve(TaskService);
 
 // find tasks
-router.route("/").get(hasAccess, service.find);
+router
+  .route("/")
+  .get(
+    (req, res, next) => hasAccess(req, res, next, [UserRole.USER]),
+    service.find
+  );
 
 // create task
 router
   .route("/")
   .post(
-    hasAccess,
+    (req, res, next) => hasAccess(req, res, next, [UserRole.USER]),
     validate(validation.create, { keyByField: true }),
     service.create
   );
 
 // get task
-router.route("/:id").get(hasAccess, service.get);
+router
+  .route("/:id")
+  .get(
+    (req, res, next) => hasAccess(req, res, next, [UserRole.USER]),
+    service.get
+  );
 
 // update
 router
   .route("/:id")
   .put(
-    hasAccess,
+    (req, res, next) => hasAccess(req, res, next, [UserRole.USER]),
     validate(validation.update, { keyByField: true }),
     service.update
   );
 
 // complete task
-router.route("/:id").patch(hasAccess, service.completeTask);
+router
+  .route("/:id")
+  .patch(
+    (req, res, next) => hasAccess(req, res, next, [UserRole.USER]),
+    service.completeTask
+  );
 
 // delete task
-router.route("/:id").delete(hasAccess, service.delete);
+router
+  .route("/:id")
+  .delete(
+    (req, res, next) => hasAccess(req, res, next, [UserRole.USER]),
+    service.delete
+  );
 
 export default router;

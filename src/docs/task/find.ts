@@ -1,6 +1,6 @@
 export const find = {
   get: {
-    tags: ["Task"],
+    tags: ["Tasks [USER]"],
     summary: "Find tasks",
     description: "Find tasks",
     operationId: "findTasks",

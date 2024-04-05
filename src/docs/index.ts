@@ -2,12 +2,12 @@ import { basicInfo } from "./basic";
 import { servers } from "./servers";
 import { components } from "./components";
 import { tags } from "./tags";
-import { task } from "./task";
+import { endpoints } from "./endpoints";
 
 export const docs = {
   ...basicInfo,
   ...servers,
   ...components,
   ...tags,
-  ...task,
+  ...endpoints,
 };

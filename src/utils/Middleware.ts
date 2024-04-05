@@ -1,11 +1,12 @@
 import { NextFunction, Request, Response } from "express";
 import Jwt from "./Jwt";
-import User from "../models/User";
+import User, { UserRole } from "../models/User";
 
-export default async function hasAccess(
+export async function hasAccess(
   req: Request,
   res: Response,
-  next: NextFunction
+  next: NextFunction,
+  roles: UserRole[]
 ) {
   const token = req.header("Authorization");
 
@@ -29,6 +30,14 @@ export default async function hasAccess(
 
   if (!user) {
     return res.status(401).json({ message: "User not found" });
+  }
+
+  const hasRole = roles.some((role) => user.role.includes(role));
+
+  if (!hasRole) {
+    return res
+      .status(403)
+      .json({ message: "User does not have required role" });
   }
 
   res.locals.userId = userId;
