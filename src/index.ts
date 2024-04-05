@@ -4,6 +4,7 @@ import dotenv from "dotenv";
 import MongoDB from "./configs/mongo";
 import api from "./modules/index";
 import { errorHandler } from "./utils";
+import { rateLimit } from "express-rate-limit";
 
 dotenv.config();
 
@@ -14,6 +15,13 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+// 150 requests each IP in 1 minute
+const limiter = rateLimit({
+  windowMs: 1 * 60 * 1000,
+  limit: 150,
+});
+
+app.use(limiter);
 app.use("/api/v1", api);
 
 app.get("/", (_, res) => res.json({ message: "API_IS_WORKING" }));
