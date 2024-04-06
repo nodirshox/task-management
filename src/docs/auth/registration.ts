@@ -2,7 +2,7 @@ export const registration = {
   post: {
     tags: ["Auth"],
     summary: "Registration",
-    description: "Registration",
+    description: "Create user with User role",
     operationId: "Registration",
     parameters: [] as string[],
     requestBody: {
