@@ -44,7 +44,7 @@ Password
 password
 ```
 
-## Steps to start project locally
+## Steps to start project locally (Docker program should be running in locally)
 
 1. Run following command
 

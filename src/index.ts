@@ -6,10 +6,12 @@ import api from "./modules/index";
 import { errorHandler } from "./utils";
 import { rateLimit } from "express-rate-limit";
 import cors from "cors";
+import Seed from "./utils/seed";
 
 dotenv.config();
 
 new MongoDB().connect();
+new Seed().run();
 
 const app = express();
 
