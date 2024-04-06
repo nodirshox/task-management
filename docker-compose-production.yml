@@ -45,6 +45,7 @@ services:
       - MONGO_PASSWORD=${MONGO_PASSWORD}
       - MONGO_DATABASE=${MONGO_DATABASE}
       - ACCESS_TOKEN_SECRET=${ACCESS_TOKEN_SECRET}
+      - SWAGGER_URL=https://api.task.nodirbek.uz/api/v1
     ports:
       - "3000:3000"
     labels:
