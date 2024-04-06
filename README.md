@@ -7,7 +7,7 @@ ODM: Mongoose (Mongo)
 Swagger URL:
 
 ```
-https://api.task.nodirbek.uz/api/v1/swaagger
+https://api.task.nodirbek.uz/api/v1/swagger
 ```
 
 ## Sample users
@@ -44,7 +44,7 @@ password
 
 ## Steps to start project locally
 
-1. Run following commands
+1. Run following command
 
 ```
 docker compose up -d
