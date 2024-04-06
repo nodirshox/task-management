@@ -2,9 +2,11 @@
 
 Framework: Express JS
 
-ODM: Mongoose (Mongo)
+ODM: Mongoose
 
-[Swagger URL](https://api.task.nodirbek.uz/api/v1/swagger):
+Database: Mongo
+
+[Swagger](https://api.task.nodirbek.uz/api/v1/swagger)
 
 ```
 https://api.task.nodirbek.uz/api/v1/swagger
@@ -47,13 +49,21 @@ password
 1. Run following command
 
 ```
-docker compose up -d
+docker compose up -d --build
 ```
 
 2. Go to Swagger UI:
 
 ```
 http://localhost:3000/api/v1/swagger
+```
+
+# Stop project locally
+
+1. Run following command
+
+```
+docker compose down
 ```
 
 ## Architecture
