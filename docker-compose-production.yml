@@ -1,0 +1,29 @@
+version: "3.1"
+
+services:
+  backend:
+    container_name: task-management-backend
+    image: nodirshox/task-management-backend:latest
+    restart: always
+    environment:
+      - PORT=3000
+      - MONGO_HOST=${MONGO_HOST}
+      - MONGO_PORT=8000
+      - MONGO_USER=${MONGO_USER}
+      - MONGO_PASSWORD=${MONGO_PASSWORD}
+      - MONGO_DATABASE=${MONGO_DATABASE}
+      - ACCESS_TOKEN_SECRET=${ACCESS_TOKEN_SECRET}
+    ports:
+      - "3000:3000"
+  mongo:
+    image: mongo:4.2
+    restart: always
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=${MONGO_ROOT_USERNAME}
+      - MONGO_INITDB_ROOT_PASSWORD=${MONGO_ROOT_PASSWORD}
+    volumes:
+      - mongodata:/data/db
+    ports:
+      - "8000:27017"
+volumes:
+  mongodata:
