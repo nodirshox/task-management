@@ -17,6 +17,7 @@ app.use(express.urlencoded({ extended: true }));
 
 // 150 requests each IP in 1 minute
 const limiter = rateLimit({
+  legacyHeaders: false,
   windowMs: 1 * 60 * 1000,
   limit: 150,
 });
