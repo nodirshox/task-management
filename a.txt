@@ -1,5 +1,0 @@
-db.createUser({
-    user: 'task_service',
-    pwd: 'password321',
-    roles: [{ role: 'readWrite', db:'task_service'}]
-})
