@@ -5,6 +5,7 @@ import MongoDB from "./configs/mongo";
 import api from "./modules/index";
 import { errorHandler } from "./utils";
 import { rateLimit } from "express-rate-limit";
+import cors from "cors";
 
 dotenv.config();
 
@@ -12,6 +13,7 @@ new MongoDB().connect();
 
 const app = express();
 
+app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
