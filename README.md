@@ -4,7 +4,7 @@ Framework: Express JS
 
 ODM: Mongoose (Mongo)
 
-Swagger URL:
+[Swagger URL](https://api.task.nodirbek.uz/api/v1/swagger):
 
 ```
 https://api.task.nodirbek.uz/api/v1/swagger
