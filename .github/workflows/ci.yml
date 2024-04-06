@@ -33,7 +33,7 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
             cd task-management
-            docker compose down -f docker-compose-production.yml
+            docker compose down
             git pull
             docker rmi ${{ secrets.DOCKERHUB_REPOSITORY }}
             docker pull ${{ secrets.DOCKERHUB_REPOSITORY }}
