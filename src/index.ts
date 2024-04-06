@@ -13,7 +13,12 @@ new MongoDB().connect();
 
 const app = express();
 
-app.use(cors());
+const corsOptions = {
+  credentials: true,
+  origin: ["http://localhost:3000", "https://api.task.nodirbek.uz"],
+};
+
+app.use(cors(corsOptions));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
