@@ -9,7 +9,7 @@ Database: Mongo
 [Swagger](http://localhost:3000/api/v1/swagger)
 
 ```
-https://api.task.nodirbek.uz/api/v1/swagger
+http://localhost:3000//api/v1/swagger
 ```
 
 ## Sample users
