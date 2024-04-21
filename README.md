@@ -6,7 +6,7 @@ ODM: Mongoose
 
 Database: Mongo
 
-[Swagger](https://api.task.nodirbek.uz/api/v1/swagger)
+[Swagger](http://localhost:3000/api/v1/swagger)
 
 ```
 https://api.task.nodirbek.uz/api/v1/swagger
